@@ -17,6 +17,8 @@ window.onload = function () {
 	}
 
 	var CanvasSize = {
+		width:null,
+		height:null,
 		obj:null,
 		ctx:null,
 		init:function(arg){
@@ -24,22 +26,25 @@ window.onload = function () {
 			this.obj = document.getElementById(arg);
 			this.ctx = this.obj.getContext('2d');
 			if (this.ctx) {
-				this.obj.width = windowSize.width-4;
-				this.obj.height = Math.ceil(windowSize.height/10);
+				this.width  = this.obj.width = windowSize.width-4;
+				this.height = this.obj.height = Math.ceil(windowSize.height/10);
 			}
 			return this;
 		}
 	}
 
 	var CanvasLoad = {
-		init:function(ctx){
-			//初始化路径
-			ctx.beginPath();
-
+		width:null,
+		height:null,
+		horizontal1:{left:null,right:null},
+		horizontal2:{left:null,right:null},
+		vertical   :{top:null,bottom:null},
+		init:function(obj){
+			this.width = obj.width * 0.8;
+			this.height = obj.height * 0.6;
 		}
 	}
 
 	//初始化canvas宽高
 	var CanvasSize = CanvasSize.init('canvas');
-	var ctx = CanvasSize.ctx;
 }
