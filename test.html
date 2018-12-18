@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<canvas id="canvas" width="900" height="900"></canvas>
+</body>
+<script type="text/javascript">
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext("2d");
+	var pi = Math.PI/180;
+
+	ctx.beginPath();
+	ctx.moveTo(25,25);
+	ctx.lineTo(50,25);
+	ctx.arc(50,50,25,pi*270,pi*0,false);
+	ctx.lineTo(75,75);
+	ctx.fill();
+</script>
+</html>
