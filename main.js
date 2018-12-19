@@ -26,7 +26,7 @@ window.onload = function () {
 			this.obj = document.getElementById(arg);
 			this.ctx = this.obj.getContext('2d');
 			if (this.ctx) {
-				this.width = windowSize.width;
+				this.width  = windowSize.width;
 				this.height = Math.ceil(this.width * 0.3);
 			}
 			return this;
@@ -43,15 +43,15 @@ window.onload = function () {
 		h3:{l:null,r:null},		//底部横线起始&结束位置
 		v1:{t:null,b:null},		//原侧边线起始&结束位置
 		v2:{t:null,b:null},		//侧边线  起始&结束位置
-		init:function(obj){
-			this.width     = obj.obj.width  = Math.ceil(obj.width * 0.8);
-			this.height    = obj.obj.height = Math.ceil(obj.height * 0.7);
+		init:function(size){
+			this.width     = size.obj.width  = Math.ceil(size.width * 0.8);
+			this.height    = size.obj.height = Math.ceil(size.height * 0.7);
 			this.btnWidth  = Math.floor((this.width - (20 * 2)) / 3);
 			this.btnHeight = Math.floor(this.btnWidth * 0.35); 
-			this.setLineSize(obj);
+			this.setLineSize(size);
 			return this;
 		},
-		setLineSize:function(obj){
+		setLineSize:function(size){
 			this.h1.l = 0;
 			this.h1.r = this.width;
 			this.h2.l = this.h1.l  + 20;
@@ -77,7 +77,7 @@ window.onload = function () {
 				b : load.v2.b
 			};
 
-			//btn十等分宽度
+			//btn二十等分宽度
 			var btn_w = Math.floor(load.btnWidth / 20);
 
 			//水平运动距离
@@ -93,11 +93,7 @@ window.onload = function () {
 		},
 		start: function(size, load, bg_color, surplus, btn_w, h_line, v3, i){
 			var ctx = size.ctx;
-
 			var pi = Math.PI/180;
-
-			console.log(btn_w *i);
-			console.log(h_line);
 			if (i != 0 && btn_w * i >= h_line) {
 				clearInterval(this.timeOut_id);return;
 			}else{
@@ -135,7 +131,7 @@ window.onload = function () {
 			ctx.moveTo(load.h2.l + btnSurplus + 20 + load.btnHeight, v3.t);
 			ctx.arc(load.h2.l + btnSurplus + 20 + load.btnHeight, v3.t, load.btnHeight - surplus, 0, pi*360, false);
 			ctx.fill();
-			// return;
+			return;
 		}
 	}
 
@@ -159,6 +155,6 @@ window.onload = function () {
 	 * @param size 		canvas宽高对象
 	 * @param load 		canvas初始化对象
 	*/
-	canvasInit.init(2, "rgb(550,0,0)", size, load);
+	canvasInit.init(btnNum, "rgb(550,0,0)", size, load);
 
 }
