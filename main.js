@@ -1,4 +1,4 @@
-window.onload = function () {
+// window.onload = function () {
 	var utils = {
 		getWindowSize: function() {
 	        return {
@@ -46,8 +46,22 @@ window.onload = function () {
 		init:function(size){
 			this.width     = size.obj.width  = Math.ceil(size.width * 0.8);
 			this.height    = size.obj.height = Math.ceil(size.height * 0.7);
+
+			//外层div宽高
+			var tab = document.getElementById("tab");
+			tab.style.width = this.width + 'px';
+			tab.style.left  = Math.floor((size.width - this.width) / 2) + 'px';
+
+			//btn宽高
 			this.btnWidth  = Math.floor((this.width - (20 * 2)) / 3);
 			this.btnHeight = Math.floor(this.btnWidth * 0.35); 
+			var btn   = document.getElementById("btn");
+			var nodes = btn.childNodes;
+			btn.style.width = this.width + 'px';
+			for(var i = 1; i < nodes.length; i+=2){
+				nodes[i].style.width  = this.btnWidth  + 'px';
+				nodes[i].style.height = this.height + 'px';
+			}
 			this.setLineSize(size);
 			return this;
 		},
@@ -89,6 +103,8 @@ window.onload = function () {
 				canvasInit.start(size, load, bg_color, surplus, btn_w, h_line, v3, i);
 				i++;
 			}, 10);
+
+			btnNum = num;
 			return;
 		},
 		start: function(size, load, bg_color, surplus, btn_w, h_line, v3, i){
@@ -103,6 +119,7 @@ window.onload = function () {
 
 			//动态btn左圆弧与画布顶部横线左侧起点距离
 			var btnSurplus = btn_w * i + surplus;
+			console.log(btnNum);
 
 			ctx.fillStyle = bg_color;
 			//左上角起始位置开始
@@ -157,4 +174,4 @@ window.onload = function () {
 	*/
 	canvasInit.init(btnNum, "rgb(550,0,0)", size, load);
 
-}
+// }

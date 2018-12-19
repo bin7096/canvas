@@ -12,30 +12,35 @@
 			background: #000000;
 		}
 		.tab{
-			margin:0 auto;
 			text-align:center;
 			position:fixed;
 			bottom:2rem;
-			width:100%;
 			border:1px solid green;
+			text-align:center;
+			display:inline-block;
 		}
 		.canvas{
 			border:1px solid skyblue;
 		}
-		.btn-div{
-			position:relative;
+		.btn{
+			position:fixed;
+			bottom:2rem;
+			text-align:center;
+		}
+		.btn div{
+			display:inline-block;
 		}
 	</style>
-	<script type="text/javascript" src="main.js"></script>
 </head>
 <body>
-	<div class="tab">
+	<div class="tab" id="tab">
 		<canvas class="canvas" id="canvas"></canvas>
-		<div class="btn-div" id="btn-div">
-			<div class="btn" id="btn"></div>
-			<div class="btn" id="btn"></div>
-			<div class="btn" id="btn"></div>
+		<div class="btn" id="btn">
+			<div onclick="canvasInit.init(0, 'rgb(550,0,0)', size, load)"></div>
+			<div onclick="canvasInit.init(1, 'rgb(550,0,0)', size, load)"></div>
+			<div onclick="canvasInit.init(2, 'rgb(550,0,0)', size, load)"></div>
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="main.js"></script>
 </html>
