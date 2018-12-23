@@ -83,6 +83,11 @@
 	var canvasInit = {
 		timeOut_id:null,
 		init: function(num, bg_color, size, load){
+
+			if (!allowZero && btnNum === num) {
+				return;
+			}
+
 			//每个btn剩余宽度
 			var surplus = Math.floor((load.btnWidth - (20 * 2) - (load.btnHeight * 2)) * 0.5);
 			//btn主圆弧侧边线
@@ -94,23 +99,34 @@
 			//btn二十等分宽度
 			var btn_w = Math.floor(load.btnWidth / 20);
 
+			if (num < btnNum) {
+				btn_w = 0 - btn_w;
+			}
+
 			//水平运动距离
-			var h_line = load.btnWidth * num;
+			var h_line = load.btnWidth * Math.abs(num - btnNum);
+
+			var btnWidth = load.btnWidth * btnNum;
 
 			var i = 0;
 
+			//进入定时器
 			this.timeOut_id = setInterval(function() {
-				canvasInit.start(size, load, bg_color, surplus, btn_w, h_line, v3, i);
+				canvasInit.start(size, load, bg_color, surplus, btnWidth, btn_w, h_line, v3, i);
 				i++;
 			}, 10);
 
 			btnNum = num;
+
+			//关闭
+			allowZero = false;
+
 			return;
 		},
-		start: function(size, load, bg_color, surplus, btn_w, h_line, v3, i){
+		start: function(size, load, bg_color, surplus, btnWidth, btn_w, h_line, v3, i){
 			var ctx = size.ctx;
 			var pi = Math.PI/180;
-			if (i != 0 && btn_w * i >= h_line) {
+			if (i != 0 && Math.abs(btn_w) * i >= h_line) {
 				clearInterval(this.timeOut_id);return;
 			}else{
 				//清除canvas
@@ -118,8 +134,7 @@
 			}
 
 			//动态btn左圆弧与画布顶部横线左侧起点距离
-			var btnSurplus = btn_w * i + surplus;
-			console.log(btnNum);
+			var btnSurplus = btn_w * i + surplus + btnWidth;
 
 			ctx.fillStyle = bg_color;
 			//左上角起始位置开始
@@ -154,6 +169,9 @@
 
 	//全局btn位置
 	var btnNum = 0;
+
+	//首次允许零
+	var allowZero = true;
 
 	/**
 	 * 初始化canvas宽高
